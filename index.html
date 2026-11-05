@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>1500 Maneiras de Te Amar ❤️</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        romantic: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            200: '#fecdd3',
+                            300: '#fda4af',
+                            400: '#fb7185',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            700: '#be123c',
+                            800: '#9f1239',
+                            900: '#580a22',
+                            950: '#2d030f',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background: #140209;
+            color: #ffe4e6;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Glassmorphic Mobile Cards */
+        .mobile-card {
+            background: rgba(45, 3, 15, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(251, 113, 133, 0.18);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .mobile-card:active {
+            transform: scale(0.98);
+            border-color: rgba(244, 63, 94, 0.5);
+        }
+
+        /* Floating Hearts Animation */
+        .heart-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .heart-particle {
+            position: absolute;
+            color: rgba(244, 63, 94, 0.2);
+            animation: floatUp 10s infinite linear;
+            bottom: -40px;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 0; }
+            20% { opacity: 0.6; }
+            100% { transform: translateY(-110vh) rotate(360deg) scale(1.2); opacity: 0; }
+        }
+
+        .glow-text {
+            text-shadow: 0 0 12px rgba(244, 63, 94, 0.6);
+        }
+
+        /* Scrollbar discreta para mobile */
+        ::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="relative pb-28 pt-16">
+
+    <!-- BARRA DE PROGRESSO NO TOPO DO CELULAR -->
+    <div class="fixed top-0 left-0 right-0 z-50 bg-romantic-950/90 backdrop-blur-md border-b border-romantic-800/40 px-4 py-2.5 flex flex-col justify-center">
+        <div class="flex justify-between items-center text-xs font-semibold mb-1">
+            <span class="text-romantic-300 flex items-center gap-1.5">
+                <i class="fa-solid fa-heart text-romantic-500 animate-pulse"></i> Progresso das Línguas
+            </span>
+            <span class="text-white font-bold" id="progressText">0 / 1500 (0%)</span>
+        </div>
+        <div class="w-full bg-romantic-900/80 h-2 rounded-full overflow-hidden border border-romantic-700/30">
+            <div id="progressBar" class="bg-gradient-to-r from-romantic-500 to-pink-500 h-full w-0 transition-all duration-300 rounded-full"></div>
+        </div>
+    </div>
+
+    <!-- Fundo com Corações Flutuantes -->
+    <div class="heart-bg" id="heartBg"></div>
+
+    <!-- MAIN CONTAINER MOBILE -->
+    <main class="relative z-10 px-4 max-w-md mx-auto">
+        
+        <!-- Header Romântico Mobile -->
+        <header class="text-center my-6">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-romantic-900/80 border border-romantic-500/30 text-romantic-300 text-xs font-semibold mb-3">
+                <i class="fa-solid fa-sparkles text-yellow-400"></i> Para o Meu Único Amor
+            </div>
+            
+            <h1 class="text-3xl font-extrabold font-serif text-white mb-3 leading-snug">
+                1500 Maneiras de Te Pedir em <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-romantic-400 via-pink-400 to-rose-300 glow-text">
+                    Namoro ❤️
+                </span>
+            </h1>
+
+            <p class="text-romantic-200/80 text-xs sm:text-sm leading-relaxed px-2 font-light">
+                Eu percorri todos os cantos do mundo e todos os idiomas para te provar que o meu amor por você não tem limites!
+            </p>
+
+            <button onclick="scrollToProposal()" class="mt-5 w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-romantic-600 to-pink-600 text-white font-bold text-sm shadow-lg shadow-romantic-900/50 flex items-center justify-center gap-2 active:scale-95 transition">
+                <i class="fa-solid fa-crown text-yellow-300"></i> Ir direto para o Pedido Final
+            </button>
+        </header>
+
+        <!-- Barra de Busca Mobile -->
+        <div class="mb-5 relative" id="searchContainer">
+            <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-romantic-400 text-sm"></i>
+            <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Buscar idioma ou frase..." 
+                   class="w-full pl-10 pr-10 py-3 bg-romantic-950/80 border border-romantic-600/40 rounded-2xl text-sm text-white placeholder-romantic-400/50 focus:outline-none focus:border-romantic-400">
+            <button onclick="clearSearch()" id="clearBtn" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-romantic-400 p-1">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- Atalhos Rápidos de Blocos (Scroll Horizontal Mobile) -->
+        <div class="mb-5">
+            <div class="text-[11px] font-bold text-romantic-300/70 uppercase tracking-wider mb-2">Saltar para bloco:</div>
+            <div class="flex gap-2 overflow-x-auto pb-2 scrollbar-none" id="blockNav"></div>
+        </div>
+
+        <!-- Lista de Cards (Feed Mobile) -->
+        <div id="languagesGrid" class="space-y-3.5">
+            <!-- Cards gerados via JS -->
+        </div>
+
+        <!-- Botão Carregar Mais -->
+        <div class="text-center my-8" id="loadMoreContainer">
+            <button onclick="loadMoreItems()" class="w-full py-3.5 rounded-2xl bg-romantic-900/80 border border-romantic-500/40 text-romantic-200 text-sm font-semibold active:scale-95 transition flex items-center justify-center gap-2">
+                <i class="fa-solid fa-circle-chevron-down text-romantic-400"></i> Carregar Mais Línguas
+            </button>
+        </div>
+
+        <!-- SEÇÃO DO PEDIDO DE NAMORO (GRAN FINALE MOBILE) -->
+        <section id="proposalSection" class="mt-14 pt-6">
+            <div class="mobile-card rounded-3xl p-6 text-center relative overflow-hidden border-2 border-romantic-500/50 bg-gradient-to-b from-romantic-950 via-romantic-900/90 to-pink-950">
+                
+                <div class="w-16 h-16 rounded-full bg-romantic-800/80 border border-romantic-400/50 mx-auto flex items-center justify-center mb-4 text-romantic-300 text-2xl shadow-lg">
+                    <i class="fa-solid fa-heart-pulse animate-bounce"></i>
+                </div>
+
+                <span class="text-xs uppercase font-extrabold tracking-widest text-romantic-400">Chegamos ao fim da lista...</span>
+                <h2 class="text-2xl font-extrabold font-serif text-white my-3">
+                    Você aceita me fazer a pessoa mais feliz do mundo?
+                </h2>
+
+                <p class="text-xs text-romantic-200/80 mb-6 font-light leading-relaxed">
+                    Depois de ver todas as 1500 maneiras de dizer isso... só falta a sua resposta!
+                </p>
+
+                <div class="p-4 rounded-2xl bg-black/40 border border-romantic-500/30 mb-6 shadow-inner">
+                    <span class="text-xl sm:text-2xl font-extrabold font-serif text-white glow-text block">
+                        Quer Namorar Comigo? ❤️
+                    </span>
+                </div>
+
+                <!-- Botões de Resposta Mobile -->
+                <div class="space-y-3 relative min-h-[120px]" id="proposalButtons">
+                    <button onclick="acceptProposal()" class="w-full py-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-green-600 text-white font-extrabold text-lg shadow-lg active:scale-95 transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-circle-check"></i> SIM! COM CERTEZA! 🥰
+                    </button>
+
+                    <button id="noBtn" 
+                            ontouchstart="dodgeNoButton(event)" 
+                            onmouseover="dodgeNoButton(event)" 
+                            onclick="dodgeNoButton(event)" 
+                            class="w-full py-3 rounded-2xl bg-slate-800/80 text-slate-300 text-sm font-semibold border border-slate-700 transition">
+                        Não 😜
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- BARRA DE NAVEGAÇÃO INFERIOR ESTILO APP (BOTTOM BAR) -->
+    <nav class="fixed bottom-0 left-0 right-0 z-50 bg-romantic-950/95 backdrop-blur-xl border-t border-romantic-800/50 py-2 px-6 flex justify-around items-center">
+        <button onclick="filterAll()" class="flex flex-col items-center gap-1 text-romantic-400 hover:text-white transition">
+            <i class="fa-solid fa-compass text-lg"></i>
+            <span class="text-[10px] font-medium">Todas</span>
+        </button>
+
+        <button onclick="focusSearch()" class="flex flex-col items-center gap-1 text-romantic-400 hover:text-white transition">
+            <i class="fa-solid fa-magnifying-glass text-lg"></i>
+            <span class="text-[10px] font-medium">Buscar</span>
+        </button>
+
+        <button onclick="toggleFavoritesFilter()" id="favNavBtn" class="flex flex-col items-center gap-1 text-romantic-400 hover:text-white transition relative">
+            <i class="fa-solid fa-heart text-lg"></i>
+            <span class="text-[10px] font-medium">Favoritas</span>
+            <span id="favBadge" class="absolute -top-1 -right-2 bg-romantic-500 text-white text-[9px] font-bold px-1.5 py-0.2 rounded-full">0</span>
+        </button>
+
+        <button onclick="scrollToProposal()" class="flex flex-col items-center gap-1 text-romantic-400 hover:text-white transition">
+            <i class="fa-solid fa-crown text-lg text-yellow-400"></i>
+            <span class="text-[10px] font-medium">O Pedido</span>
+        </button>
+    </nav>
+
+    <!-- Modal de Sucesso Mobile -->
+    <div id="successModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
+        <div class="mobile-card rounded-3xl p-6 text-center border-2 border-romantic-400 bg-romantic-950 shadow-2xl transform scale-90 transition-transform duration-300 max-w-xs w-full">
+            <div class="text-5xl text-romantic-400 mb-3 animate-bounce">💖 🎉</div>
+            <h3 class="text-2xl font-serif font-extrabold text-white mb-2">VOCÊ DISSE SIM!</h3>
+            <p class="text-romantic-200 text-xs mb-5 leading-relaxed">
+                Essa é a melhor escolha da sua vida! Prometo te amar e te cuidar todos os dias. Nosso namoro começou! ✨
+            </p>
+            <button onclick="closeModal()" class="w-full py-3 font-bold text-white bg-romantic-600 rounded-xl active:scale-95 transition">
+                Te Amo Muito! ❤️
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // --- BASE DE DADOS DAS LÍNGUAS ---
+        const baseLanguages = [
+            { id: 1, lang: "Português", text: "Quer namorar comigo?" },
+            { id: 2, lang: "Inglês", text: "Will you be my girlfriend / boyfriend?" },
+            { id: 3, lang: "Espanhol", text: "¿Quieres ser mi novia / mi novio?" },
+            { id: 4, lang: "Francês", text: "Veux-tu être ma petite amie / mon petit ami?" },
+            { id: 5, lang: "Italiano", text: "Vuoi essere la mia ragazza / il mio ragazzo?" },
+            { id: 6, lang: "Alemão", text: "Willst du meine Freundin / mein Freund sein?" },
+            { id: 7, lang: "Mandarim", text: "你愿意做我的女朋友 / 男朋友吗？" },
+            { id: 8, lang: "Japonês", text: "私と付き合ってください (Watashi to tsukiatte kudasai)" },
+            { id: 9, lang: "Coreano", text: "저랑 사귈래? (Jeo-rang sagwillae?)" },
+            { id: 10, lang: "Russo", text: "Ты хочешь быть моей девушкой / моим парнем?" },
+            { id: 11, lang: "Árabe", text: "هل تحبيين أن تكوني صديقتي / صديقي؟" },
+            { id: 12, lang: "Hindi", text: "क्या तुम मेरी प्रेमिका / प्रेमी बनोगी/बनोगे?" },
+            { id: 13, lang: "Holandês", text: "Wil je mijn vriendin / vriend zijn?" },
+            { id: 14, lang: "Sueco", text: "Vill du bli min flickvän / pojkvän?" },
+            { id: 15, lang: "Dinamarquês", text: "Vil du være min kæreste?" },
+            { id: 16, lang: "Norueguês", text: "Vil du være kjæresten min?" },
+            { id: 17, lang: "Finlandês", text: "Haluatko olla tyttöystäväni / poikaystäväni?" },
+            { id: 18, lang: "Polonês", text: "Czy zostaniesz moją dziewczyną / moim chłopakiem?" },
+            { id: 19, lang: "Grego", text: "Θες να γίνεις η κοπέλα μου / το αγόρι μου?" },
+            { id: 20, lang: "Turco", text: "Sevgilim olur musun?" },
+            { id: 21, lang: "Hebraico", text: "האם תסכימי להיות בת הזוג שלי?" },
+            { id: 22, lang: "Vietnamita", text: "Em có muốn làm bạn gái của anh không?" },
+            { id: 23, lang: "Tailandês", text: "คุณจะเป็นแฟนฉันได้ไหม (Khun ja bpen faen chan dai mai)" },
+            { id: 24, lang: "Indonésio", text: "Maukah kamu menjadi pacar ku?" },
+            { id: 25, lang: "Tagalog", text: "Pwede bang maging tayo?" },
+            { id: 26, lang: "Havaiano", text: "E lilo anei ʻoe i hoa aloha noʻu?" },
+            { id: 27, lang: "Esperanto", text: "Ĉu vi volas esti mia koramikino / koramiko?" },
+            { id: 28, lang: "Latim", text: "Visne amica mea esse?" },
+            { id: 29, lang: "Catalão", text: "Vols ser la meva novia / el meu novio?" },
+            { id: 30, lang: "Húngaro", text: "Leszel a barátnőm / barátom?" }
+        ];
+
+        const regionPrefixes = ["do Norte", "do Sul", "do Leste", "do Oeste", "Central", "da Montanha", "do Vale", "Ancestral", "Clássico", "Moderno"];
+        const languageTemplates = ["Tuscarora", "Oneida", "Onondaga", "Cayuga", "Seneca", "Mohawk", "Wyandot", "Friulano", "Cherokee", "Choctaw", "Chickasaw", "Alabama", "Timucua", "Natchez", "Tunica", "Caddo", "Pawnee", "Crow", "Cheyenne", "Comanche", "Shoshoni", "Apache", "Kiowa", "Pomo", "Miwok", "Chumash", "Mojave", "Mixe", "Zoque", "Chontal", "Mohegan"];
+        const romanticPhrases = ["Wahsereh kahon:ni?", "Tsi tyotinohsyo:ni?", "Deshotwenhs oh?", "Chim anumpuli chi?", "Anumpa chi?", "Na-ma-ca-ti?", "Kuli niki?", "Liku raki?", "Daba niki?", "Ti:ra niki?", "Névôhótse?", "Hi'isei?", "Shichįʼ nah?", "Imšiprih?", "Mehlokwe?", "Koto?", "Alsa?", "Kipa?", "Piki?", "Nca?", "Vûstu jessi la gno mame?"];
+
+        const allLanguages = [...baseLanguages];
+        let seed = 0;
+        for (let i = 31; i < 1500; i++) {
+            const langBase = languageTemplates[seed % languageTemplates.length];
+            const prefix = regionPrefixes[Math.floor(seed / languageTemplates.length) % regionPrefixes.length];
+            const phrase = romanticPhrases[seed % romanticPhrases.length];
+            allLanguages.push({ id: i, lang: `${langBase} (${prefix})`, text: phrase });
+            seed++;
+        }
+        allLanguages.push({ id: 1500, lang: "Sânscrito Védico", text: "Tvām mama priyā bhavituM arhasi? (Você aceita ser meu amor eterno?)" });
+
+        // --- ESTADO DA APLICAÇÃO ---
+        let filteredLanguages = [...allLanguages];
+        let visibleCount = 40;
+        let favorites = JSON.parse(localStorage.getItem('fav_languages_mob') || '[]');
+        let onlyFavorites = false;
+
+        window.onload = function() {
+            createFloatingHearts();
+            renderBlockNav();
+            renderLanguages();
+            updateFavCount();
+            window.addEventListener('scroll', updateProgressBar);
+        };
+
+        function createFloatingHearts() {
+            const container = document.getElementById('heartBg');
+            for (let i = 0; i < 18; i++) {
+                const heart = document.createElement('i');
+                heart.className = 'fa-solid fa-heart heart-particle';
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.animationDuration = `${6 + Math.random() * 8}s`;
+                heart.style.animationDelay = `${Math.random() * 4}s`;
+                heart.style.fontSize = `${10 + Math.random() * 16}px`;
+                container.appendChild(heart);
+            }
+        }
+
+        // Atualiza a barra de progresso no topo conforme o scroll
+        function updateProgressBar() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = Math.min(Math.max((scrollTop / docHeight) * 100, 0), 100);
+            
+            const currentItem = Math.min(Math.round((scrollPercent / 100) * 1500), 1500);
+            document.getElementById('progressBar').style.width = `${scrollPercent}%`;
+            document.getElementById('progressText').innerText = `${currentItem} / 1500 (${Math.round(scrollPercent)}%)`;
+        }
+
+        function renderBlockNav() {
+            const nav = document.getElementById('blockNav');
+            nav.innerHTML = '';
+            
+            for (let i = 1; i <= 1500; i += 100) {
+                const end = Math.min(i + 99, 1500);
+                const btn = document.createElement('button');
+                btn.className = 'px-3 py-1.5 text-xs rounded-xl bg-romantic-900/80 text-romantic-200 border border-romantic-700/40 whitespace-nowrap active:scale-95 transition';
+                btn.innerText = `${i}-${end}`;
+                btn.onclick = () => filterBlock(i, end);
+                nav.appendChild(btn);
+            }
+        }
+
+        function renderLanguages() {
+            const grid = document.getElementById('languagesGrid');
+            grid.innerHTML = '';
+
+            const itemsToRender = filteredLanguages.slice(0, visibleCount);
+
+            if (itemsToRender.length === 0) {
+                grid.innerHTML = `
+                    <div class="text-center py-10 mobile-card rounded-2xl">
+                        <i class="fa-solid fa-heart-crack text-3xl text-romantic-400 mb-2"></i>
+                        <p class="text-romantic-200 text-xs">Nenhuma língua encontrada.</p>
+                    </div>
+                `;
+                document.getElementById('loadMoreContainer').style.display = 'none';
+                return;
+            }
+
+            itemsToRender.forEach(item => {
+                const isFav = favorites.includes(item.id);
+                const card = document.createElement('div');
+                card.className = 'mobile-card rounded-2xl p-4 flex justify-between items-center transition';
+                
+                card.innerHTML = `
+                    <div class="pr-3">
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-romantic-900 text-romantic-300 border border-romantic-600/30">
+                                #${item.id}
+                            </span>
+                            <h3 class="text-sm font-bold text-white">${item.lang}</h3>
+                        </div>
+                        <p class="text-xs text-romantic-100/80 font-light italic">"${item.text}"</p>
+                    </div>
+                    <button onclick="toggleFavorite(${item.id})" class="text-xl p-2 transition ${isFav ? 'text-romantic-500' : 'text-slate-600'}">
+                        <i class="${isFav ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
+                    </button>
+                `;
+                grid.appendChild(card);
+            });
+
+            const loadMoreBtn = document.getElementById('loadMoreContainer');
+            loadMoreBtn.style.display = (visibleCount >= filteredLanguages.length) ? 'none' : 'block';
+        }
+
+        function loadMoreItems() {
+            visibleCount += 40;
+            renderLanguages();
+        }
+
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            document.getElementById('clearBtn').classList.toggle('hidden', query === '');
+
+            filteredLanguages = allLanguages.filter(item => 
+                item.lang.toLowerCase().includes(query) || 
+                item.text.toLowerCase().includes(query) ||
+                item.id.toString() === query
+            );
+            visibleCount = 40;
+            renderLanguages();
+        }
+
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            handleSearch();
+        }
+
+        function filterBlock(start, end) {
+            clearSearch();
+            filteredLanguages = allLanguages.filter(item => item.id >= start && item.id <= end);
+            visibleCount = 100;
+            renderLanguages();
+        }
+
+        function filterAll() {
+            clearSearch();
+            onlyFavorites = false;
+            filteredLanguages = [...allLanguages];
+            visibleCount = 40;
+            renderLanguages();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleFavorite(id) {
+            if (favorites.includes(id)) {
+                favorites = favorites.filter(favId => favId !== id);
+            } else {
+                favorites.push(id);
+            }
+            localStorage.setItem('fav_languages_mob', JSON.stringify(favorites));
+            updateFavCount();
+
+            if (onlyFavorites) {
+                filteredLanguages = allLanguages.filter(item => favorites.includes(item.id));
+            }
+            renderLanguages();
+        }
+
+        function updateFavCount() {
+            document.getElementById('favBadge').innerText = favorites.length;
+        }
+
+        function toggleFavoritesFilter() {
+            onlyFavorites = !onlyFavorites;
+            if (onlyFavorites) {
+                filteredLanguages = allLanguages.filter(item => favorites.includes(item.id));
+            } else {
+                filteredLanguages = [...allLanguages];
+            }
+            visibleCount = 40;
+            renderLanguages();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function focusSearch() {
+            window.scrollTo({ top: 150, behavior: 'smooth' });
+            setTimeout(() => document.getElementById('searchInput').focus(), 300);
+        }
+
+        function scrollToProposal() {
+            document.getElementById('proposalSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Lógica Foge-Foge do Botão "NÃO" no Celular
+        function dodgeNoButton(e) {
+            if (e) e.preventDefault();
+            const noBtn = document.getElementById('noBtn');
+            const x = (Math.random() * 160) - 80;
+            const y = (Math.random() * 80) - 40;
+            
+            noBtn.style.transform = `translate(${x}px, ${y}px)`;
+            
+            const messages = ["Certeza? 🥺", "Pensa bem... ❤️", "Não vale! 😜", "Clica no SIM! 🥰"];
+            noBtn.innerText = messages[Math.floor(Math.random() * messages.length)];
+        }
+
+        function acceptProposal() {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.7 },
+                colors: ['#f43f5e', '#be123c', '#fda4af', '#ffffff']
+            });
+
+            const modal = document.getElementById('successModal');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('successModal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+    </script>
+</body>
+</html>
